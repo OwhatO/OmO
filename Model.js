@@ -50,7 +50,7 @@ function makeProxy( target, )
 			{
 				if( value instanceof Model )
 				{
-					[ target[CHILDREN][key], value, ]= [ value.express( x=> x, ), target[CHILDREN][key], ];
+					[ target[CHILDREN][key], value, ]= [ value.$( x=> x, ), target[CHILDREN][key], ];
 					
 					target[CHILDREN][key][CHILDREN]= value[CHILDREN];
 					target[CHILDREN][key][OBSERVERS]= value[OBSERVERS];
@@ -221,17 +221,17 @@ export default class Model
 			return this[ORIGIN][VALUE];
 	}
 	
-	get isObject()
+	get IS_OBJECT()
 	{
 		return this[ORIGIN][VALUE] === OBJECT_VALUE;
 	}
 	
-	get id()
+	get ID()
 	{
 		return this[ID];
 	}
 	
-	get name()
+	get NAME()
 	{
 		return this[NAME];
 	}
@@ -271,11 +271,6 @@ export default class Model
 	[INIT_OBSERVER]( observer, )
 	{
 		observer( this.valueOf(), undefined, );
-	}
-	
-	express( callback, )
-	{
-		return Model.express( callback, this, );
 	}
 	
 	static express( callback, ...models )
